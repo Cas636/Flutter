@@ -1,84 +1,104 @@
 import 'package:flutter/material.dart';
+import 'form.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 void main() {
   runApp( MainApp());
 }
 
 class MainApp extends StatelessWidget {
 
+   void _navigateToform(BuildContext context) {
+    navigatorKey.currentState!.push(
+      MaterialPageRoute(builder: (context) => form()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       title: "Identificación",
       theme: ThemeData(
         fontFamily: 'ELEGANT TYPEWRITER',
         primarySwatch: Colors.deepPurple , 
       ),
-      
       home: Scaffold(
         appBar: AppBar(
-          title: Text('PASAPORTE'), 
+          title: const Text('PASAPORTE'), 
           centerTitle: true,
         ),
-        body: Row(
-          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children:[ 
-            Expanded(
-              child: Container(
-              child: Image.asset('assets/img1.jpg', ), 
-              margin: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 67, 32, 70),
-                border: Border.all(color: Colors.black, width: 4),
-                borderRadius: BorderRadius.circular(1)
-        ),
-        ),
+        body: Column(
+          children: [
+            Row(
+          
+          //
+          children: [
+            
+            Container(
+              alignment: Alignment.topLeft,
+              child: Image.asset('assets/img1.jpg'),
+              
             ),
-            Expanded(
+            
+            const SizedBox(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(child:  Text('PEPITO PEREZ', 
+              children: [
+                Text('PEPITO PEREZ', 
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                Text('NAME'),
+                Text('COLOMBIANA', 
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 18,
                     fontWeight: FontWeight.bold
-                  ),), ),
-                  Expanded(child: Text('NAME'),),
-                  Expanded(child: Text('COLOMBIANA', 
+                  ),
+                ),
+                Text('NATIONALITY'),
+                Text('13 DE ABRIL', 
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 18,
                     fontWeight: FontWeight.bold
-                  ),),),
-                  Expanded(child: Text('NATIONALITY'),),
-                  Expanded(child: Text('13 DE ABRIL', 
+                  ),
+                ),
+                Text('DATE OF ISSUE'),
+                Text('COLOMBIA', 
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 18,
                     fontWeight: FontWeight.bold
-                  ),),),
-                  Expanded(child: Text('DATE OF ISSUE'),),
-                  Expanded(child: Text('COLOMBIA', 
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold
-                  ),),),
-                  Expanded(child: Text('AUTHORITY'),),
-
-                ],
-              )
+                  ),
+                ),
+                Text('AUTHORITY'),
+              ],
               ),
-                     
-            ],
+            ),
+            
+          ],
+          
         ),
+        Container(
+              alignment: Alignment.center,
+              child: ElevatedButton(
+              onPressed: () {
+                _navigateToform(context);
+              },
+              child: const Text('Ir a la segunda pantalla'),
+          ),
+            )
+          ],
+      ),
       ),
     );
   }
